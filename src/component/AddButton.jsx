@@ -9,7 +9,7 @@ class AddButton extends React.Component {
     }
 
     handleClick() {
-        this.props.onClick();
+        this.props.onClick(true, "new");
     }
 
     render() {

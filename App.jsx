@@ -3,29 +3,62 @@ import Title from './src/component/Title.jsx';
 import AddButton from './src/component/AddButton.jsx';
 import Item from './src/component/Item.jsx';
 import ItemList from './src/component/ItemList.jsx';
+import EditLayout from './src/component/EditLayout.jsx';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            mode: "show"
+            mode: "show",
+            editMode: "new"
         };
 
-        this.onAddButtonClick = this.onAddButtonClick.bind(this);
+        this.manageEditOverlay = this.manageEditOverlay.bind(this);
+        this.closeEditOverlay = this.closeEditOverlay.bind(this);
+        this.removeItem = this.removeItem.bind(this);
+        this.addItem = this.addItem.bind(this);
     }
 
-    openEditOverlay() {
+    //Delegates
+    manageEditOverlay(showEnable, mode) {
         console.log("Opening Edit Overlay...");
         this.setState(prevState => ({
-            mode: "edit"
+            mode: showEnable == true ? "edit" : "show",
+            editMode: mode
         }));
     }
 
-    onAddButtonClick() {
-        this.openEditOverlay();
+    closeEditOverlay() {
+        console.log("Closing Edit Overlay...");
+        this.setState(prevState => ({
+            mode: "show",
+            editMode: ""
+        }));
+
+        this.setState(this.state);
+    }
+
+    removeItem(itemId) {
+        //Remove item from item list
+
+        this.setState(this.state);
+    }
+
+    addItem(title, summary, date) {
+        items.push({
+            "itemId": items.length,
+            "title": title,
+            "summary": summary,
+            "date": date,
+            "isDone": false
+        });
+
+        this.setState(this.state);
     }
 
     render() {
+        var editLayoutEnable = this.mode == "edit" ? true : false;
+
         return (
             <div>
                 <div>
@@ -34,13 +67,20 @@ class App extends React.Component {
                             <Title />
                         </td>
                         <td>
-                            <AddButton onClick={this.onAddButtonClick}/>
+                            <AddButton onClick={this.manageEditOverlay}/>
                         </td>
                     </tr>
                 </div>
                 <div>
                     <ItemList items={items} />
                 </div>
+                <EditLayout 
+                    showEnable={editLayoutEnable} 
+                    mode={this.state.editMode} 
+                    onClose={this.closeEditOverlay}
+                    onAddItem={this.addItem}
+                    onRemoveItem={this.removeItem}
+                />
             </div>
         );
     }
@@ -64,18 +104,6 @@ var items = [{
             "summary": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.",
             "date": "2016-07-04",
             "isDone": false
-            }, {
-            "itemId": 0,
-            "title": "Ut at dolor quis odio consequat varius.",
-            "summary": "Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.",
-            "date": "2016-05-25",
-            "isDone": false
-            }, {
-            "itemId": 0,
-            "title": "Praesent blandit. Nam nulla.",
-            "summary": "Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",
-            "date": "2016-06-20",
-            "isDone": true
         }]
 
 export default App;
