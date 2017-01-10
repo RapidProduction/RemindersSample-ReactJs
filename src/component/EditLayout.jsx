@@ -103,7 +103,7 @@ class EditLayout extends React.Component {
 
     render() {
         var buttonAction = this.props.mode == "new" ? 
-            <button onClick={this.handleAdd}>Add</button> :
+            <button onClick={this.handleAdd}>Done</button> :
             <button onClick={this.handleRemove}>Remove</button>;
 
         var titleValue = this.getValidatedText(this.state.title, "New Topic", this.state.titleChangedOnce);
@@ -112,9 +112,11 @@ class EditLayout extends React.Component {
         return (
             <div>
                 <button onClick={this.handleClose}>x</button>
+                <br />
                 <input type="text" name="Title" value={titleValue} onChange={this.handleTitleChange} onClick={this.handleTitleClick}/>
+                <br />
                 <input type="text" name="Summary" value={summaryValue} onChange={this.handleSummaryChange} onClick={this.handleSummaryClick}/>
-
+                <br />
                 {buttonAction}
             </div>
         );
