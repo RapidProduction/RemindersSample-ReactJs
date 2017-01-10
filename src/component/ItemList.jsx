@@ -23,7 +23,7 @@ class ItemList extends React.Component {
 
     render() {
         var listItems = [];
-        if (this.props.items != undefined) {
+        if (this.props.items != undefined && this.props.items.length > 0) {
             for(var i=0; i<this.props.items.length; i++) {
                 listItems.push(<Item item={this.props.items[i]} onClick={this.handleOnClick} onCheck={this.handleOnCheck}/>)
             }

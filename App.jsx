@@ -5,6 +5,9 @@ import Item from './src/component/Item.jsx';
 import ItemList from './src/component/ItemList.jsx';
 import EditLayout from './src/component/EditLayout.jsx';
 import ActionBar from './src/component/ActionBar.jsx';
+import Loader from './src/utility/Loader';
+
+require('./src/sass/layout/homeLayout.scss');
 
 class App extends React.Component {
     constructor(props) {
@@ -16,6 +19,13 @@ class App extends React.Component {
         };
 
         this.registerHandles();
+
+        //Loaders
+        this.loader = new Loader();
+        items = this.loader.loadItem();
+        this.loader.startAutosaving(() => {
+            return items;
+        });
     }
 
     registerHandles() {
@@ -100,9 +110,12 @@ class App extends React.Component {
 
     filterItemByComplete(complete) {
         var filteredItem = [];
-        for(var i=0; i<items.length; i++) {
-            if(items[i].isDone == complete) {
-                filteredItem.push(items[i]);
+
+        if(items != undefined) {
+            for(var i=0; i<items.length; i++) {
+                if(items[i].isDone == complete) {
+                    filteredItem.push(items[i]);
+                }
             }
         }
 

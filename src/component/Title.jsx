@@ -1,5 +1,7 @@
 import React from 'react';
 
+require('../sass/layout/homeLayout.scss');
+
 class Title extends React.Component {
     constructor(props) {
         super(props);
@@ -8,7 +10,7 @@ class Title extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="title">
                 Reminders
             </div>
         );
