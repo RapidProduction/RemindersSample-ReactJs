@@ -1,20 +1,12 @@
 import React from 'react';
 
+require('../sass/layout/editLayout.scss');
+
 class EditLayout extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {};
-        if(this.props.item != undefined) {
-            this.state = {
-                title: this.props.item.title, 
-                summary: this.props.item.summary,
-                date: this.props.item.date,
-                titleChangedOnce: false,
-                summaryChangedOnce: false
-            }
-        }
-
         this.registerHandles();
     }
 
@@ -28,6 +20,7 @@ class EditLayout extends React.Component {
         this.handleSummaryClick = this.handleSummaryClick.bind(this);
     }
 
+    //Handlers
     handleAdd() {
         var titleValue = this.getValidatedText(this.state.title, "New Topic");
         var summaryValue = this.getValidatedText(this.state.summary, "Please add some things");
@@ -39,7 +32,7 @@ class EditLayout extends React.Component {
     }
 
     handleRemove() {
-        this.props.onRemoveItem(this.props.item.id);
+        this.props.onRemoveItem(this.props.item.itemId);
     }
 
     handleClose() {
@@ -74,6 +67,7 @@ class EditLayout extends React.Component {
         }
     }
 
+    // Private
     getValidatedText(text, defaultText, isChangeOnce) {
         if((text == undefined || text == null || text == "") && !isChangeOnce) {
             return defaultText;
@@ -101,21 +95,41 @@ class EditLayout extends React.Component {
         return day + " " + hr + ":" + min + " " + ampm + " " + date + " " + month + " " + year;
     }
 
-    render() {
-        var buttonAction = this.props.mode == "new" ? 
+    createButtonAction() {
+        return this.props.mode == "new" ? 
             <button onClick={this.handleAdd}>Done</button> :
             <button onClick={this.handleRemove}>Remove</button>;
+    }
 
-        var titleValue = this.getValidatedText(this.state.title, "New Topic", this.state.titleChangedOnce);
-        var summaryValue = this.getValidatedText(this.state.summary, "Please add some things", this.state.summaryChangedOnce);
+    createTitleText() {
+        if(this.props.item != undefined) {
+            return this.getValidatedText(this.props.item.title, "New Topic", true);
+        }
+    
+        return this.getValidatedText(this.state.title, "New Topic", this.state.titleChangedOnce);
+    }
+
+    createSummaryText() {
+        if(this.props.item != undefined) {
+            return this.getValidatedText(this.props.item.summary, "New Topic", true);
+        }
+    
+        return this.getValidatedText(this.state.summary, "New Topic", this.state.titleChangedOnce);
+    }
+
+    //Rendering
+    render() {
+        var buttonAction = this.createButtonAction();
+        var titleValue = this.createTitleText();
+        var summaryValue = this.createSummaryText();
 
         return (
-            <div>
+            <div className="edit-layout">
                 <button onClick={this.handleClose}>x</button>
                 <br />
-                <input type="text" name="Title" value={titleValue} onChange={this.handleTitleChange} onClick={this.handleTitleClick}/>
+                <input className="title" type="text" name="Title" value={titleValue} onChange={this.handleTitleChange} onClick={this.handleTitleClick}/>
                 <br />
-                <input type="text" name="Summary" value={summaryValue} onChange={this.handleSummaryChange} onClick={this.handleSummaryClick}/>
+                <input className="summary" type="text" name="Summary" value={summaryValue} onChange={this.handleSummaryChange} onClick={this.handleSummaryClick}/>
                 <br />
                 {buttonAction}
             </div>

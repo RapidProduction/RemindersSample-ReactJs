@@ -4,14 +4,21 @@ import Item from './Item.jsx';
 class ItemList extends React.Component {
     constructor(props) {
         super(props);
+
+        this.handleOnClick = this.handleOnClick.bind(this);
+    }
+
+    handleOnClick(clickedItem) {
+        if(this.props.onClick != undefined) {
+            this.props.onClick(clickedItem);
+        }
     }
 
     render() {
         var listItems = [];
         if (this.props.items != undefined) {
             for(var i=0; i<this.props.items.length; i++) {
-                let item = this.props.items[i];
-                listItems.push(<Item title={item.title} date={item.date} />)
+                listItems.push(<Item item={this.props.items[i]} onClick={this.handleOnClick}/>)
             }
         }
         else {

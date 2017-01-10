@@ -1,9 +1,18 @@
+function getEntrySources(sources) {
+    sources.push('webpack/hot/only-dev-server');
+    return sources;
+}
+
 var config = {
-   entry: './main.js',
+   entry: {
+       reminder: getEntrySources([
+           './main.js'
+       ])
+   },
 	
    output: {
       path:'./',
-      filename: 'index.js',
+      filename: 'dist/index.js',
    },
 	
    devServer: {
@@ -21,6 +30,10 @@ var config = {
             query: {
                presets: ['es2015', 'react']
             }
+         },
+         {
+            test: /\.scss$/,
+            loaders: ['style', 'css', 'sass']
          }
       ]
    }
