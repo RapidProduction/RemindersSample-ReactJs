@@ -6,6 +6,7 @@ class ItemList extends React.Component {
         super(props);
 
         this.handleOnClick = this.handleOnClick.bind(this);
+        this.handleOnCheck = this.handleOnCheck.bind(this);
     }
 
     handleOnClick(clickedItem) {
@@ -14,11 +15,17 @@ class ItemList extends React.Component {
         }
     }
 
+    handleOnCheck(checkedItem) {
+        if(this.props.onCheck != undefined) {
+            this.props.onCheck(checkedItem);
+        }
+    }
+
     render() {
         var listItems = [];
         if (this.props.items != undefined) {
             for(var i=0; i<this.props.items.length; i++) {
-                listItems.push(<Item item={this.props.items[i]} onClick={this.handleOnClick}/>)
+                listItems.push(<Item item={this.props.items[i]} onClick={this.handleOnClick} onCheck={this.handleOnCheck}/>)
             }
         }
         else {

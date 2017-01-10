@@ -7,6 +7,7 @@ class Item extends React.Component {
         super(props);
 
        this.handleOnClick = this.handleOnClick.bind(this);
+       this.handleOnCheck = this.handleOnCheck.bind(this);
     }
 
     handleOnClick() {
@@ -17,13 +18,21 @@ class Item extends React.Component {
         //Amimate Clicking
     }
 
+    handleOnCheck() {
+        if (this.props.onCheck != undefined) {
+            var updatedItem = this.props.item;
+            updatedItem.isDone = !updatedItem.isDone;
+            this.props.onCheck(updatedItem);
+        }
+    }
+
     render() {
         return (
             <div onClick={this.handleOnClick}>
                 <table>
                     <tr>
                         <td>
-                            <CheckBox />
+                            <CheckBox isChecked={this.props.item.isDone} onCheck={this.handleOnCheck}/>
                         </td>    
                         <td>
                             <Topic title={this.props.item.title} date={this.props.item.date} />

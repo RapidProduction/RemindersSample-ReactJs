@@ -4,6 +4,7 @@ import AddButton from './src/component/AddButton.jsx';
 import Item from './src/component/Item.jsx';
 import ItemList from './src/component/ItemList.jsx';
 import EditLayout from './src/component/EditLayout.jsx';
+import ActionBar from './src/component/ActionBar.jsx';
 
 class App extends React.Component {
     constructor(props) {
@@ -14,14 +15,22 @@ class App extends React.Component {
             clickedItem: undefined
         };
 
-        this.manageEditOverlay = this.manageEditOverlay.bind(this);
-        this.closeEditOverlay = this.closeEditOverlay.bind(this);
-        this.removeItem = this.removeItem.bind(this);
-        this.addItem = this.addItem.bind(this);
-        this.handleItemListOnClick = this.handleItemListOnClick.bind(this);
+        this.registerHandles();
     }
 
-    //Delegates
+    registerHandles() {
+        this.manageEditOverlay = this.manageEditOverlay.bind(this);
+        this.closeEditOverlay = this.closeEditOverlay.bind(this);
+        this.addItem = this.addItem.bind(this);
+        this.removeItem = this.removeItem.bind(this);
+        this.updateItem = this.updateItem.bind(this);
+        this.handleItemListOnClick = this.handleItemListOnClick.bind(this);
+        this.getDisplayItem = this.getDisplayItem.bind(this);
+        this.handleFilter = this.handleFilter.bind(this);
+        this.filterItemByComplete = this.filterItemByComplete.bind(this);
+    }
+
+    //Overlaying
     manageEditOverlay(showEnable, mode, item) {
         this.setState(prevState => ({
             mode: showEnable == true ? "edit" : "show",
@@ -39,11 +48,7 @@ class App extends React.Component {
         this.setState(this.state);
     }
 
-    removeItem(itemId) {
-        items.splice(itemId);
-        this.setState(this.state);
-    }
-
+    //Item Manipulating
     addItem(title, summary, date) {
         items.push({
             "itemId": items.length,
@@ -56,13 +61,92 @@ class App extends React.Component {
         this.setState(this.state);
     }
 
+    removeItem(itemId) {
+        var offset = this.findItemIndexById(itemId);
+
+        if(offset != undefined) {
+            items.splice(offset, 1);
+            this.setState(this.state);
+        }
+    }
+
+    updateItem(updatedItem) {
+        var offset = this.findItemIndexById(updatedItem.itemId);
+        items[offset] = updatedItem;
+        this.setState(this.state);
+    }
+
+    //Filters
+    handleFilter(mode) {
+        this.setState({
+            filter: mode
+        })
+    }
+
     handleItemListOnClick(clickedItem) {
-        console.log("Opening Edit layout" + clickedItem.itemId);
         this.manageEditOverlay("edit", "edit", clickedItem);
+    }
+
+    //Private Logics
+    findItemIndexById(itemId) {
+        for(var i = 0; i < items.length; i++) {
+            if(items[i].itemId == itemId) {
+                return i;
+            }
+        }
+
+        return undefined;
+    }
+
+    filterItemByComplete(complete) {
+        var filteredItem = [];
+        for(var i=0; i<items.length; i++) {
+            if(items[i].isDone == complete) {
+                filteredItem.push(items[i]);
+            }
+        }
+
+        return filteredItem;
+    }
+
+    getDisplayItem() {
+        var displayItems = [];
+        if(this.state.filter == "all") {
+            displayItems = items;
+        }
+        else if(this.state.filter == "active") {
+            displayItems = this.filterItemByComplete(false);
+        }
+        else if(this.state.filter == "complete") {
+            displayItems = this.filterItemByComplete(true);
+        }
+        else {
+            displayItems = items;
+        }
+
+        return displayItems;
     }
 
     render() {
         var editLayoutEnable = this.mode == "edit" ? true : false;
+        var displayItems = this.getDisplayItem();
+        var filterOptions = [
+            {
+                name: "All",
+                mode: "all",
+                handler: this.handleFilter
+            },
+            {
+                name: "Active",
+                mode: "active",
+                handler: this.handleFilter
+            },
+            {
+                name: "Completed",
+                mode: "complete",
+                handler: this.handleFilter
+            }
+        ];
 
         return (
             <div>
@@ -76,9 +160,12 @@ class App extends React.Component {
                                 <AddButton onClick={this.manageEditOverlay}/>
                             </td>
                         </tr>
+                        <tr>
+                            <ActionBar title="Filter" actions={filterOptions} onAction={this.handleFilter}/>
+                        </tr>
                     </div>
                     <div>
-                        <ItemList items={items} onClick={this.handleItemListOnClick}/>
+                        <ItemList items={displayItems} onClick={this.handleItemListOnClick} onCheck={this.updateItem}/>
                     </div>
                 </div>
                 <EditLayout 
@@ -87,6 +174,7 @@ class App extends React.Component {
                     item={this.state.clickedItem}
                     onClose={this.closeEditOverlay}
                     onAddItem={this.addItem}
+                    onUpdateItem={this.updateItem}
                     onRemoveItem={this.removeItem}
                 />
             </div>

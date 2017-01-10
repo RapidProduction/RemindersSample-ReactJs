@@ -10,9 +10,23 @@ class EditLayout extends React.Component {
         this.registerHandles();
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.state = {};
+        if (nextProps.item != undefined) {
+            this.state = {
+                title: nextProps.item.title,
+                summary: nextProps.item.summary,
+                date: nextProps.item.date,
+                titleChangedOnce: true,
+                summaryChangedOnce: true
+            }
+        }
+    }
+
     registerHandles() {
         this.handleAdd = this.handleAdd.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleSummaryChange = this.handleSummaryChange.bind(this);
@@ -22,8 +36,10 @@ class EditLayout extends React.Component {
 
     //Handlers
     handleAdd() {
-        var titleValue = this.getValidatedText(this.state.title, "New Topic");
-        var summaryValue = this.getValidatedText(this.state.summary, "Please add some things");
+        var defaultTitle = "New Topic";
+        var defaultSummary = "Please add some content..";
+        var titleValue = this.getValidatedText(this.state.title, defaultTitle);
+        var summaryValue = this.getValidatedText(this.state.summary, defaultSummary);
         var date = Date.now();
 
         if(titleValue != "" && summaryValue != "") {
@@ -33,6 +49,17 @@ class EditLayout extends React.Component {
 
     handleRemove() {
         this.props.onRemoveItem(this.props.item.itemId);
+        this.handleClose();
+    }
+
+    handleUpdate() {
+        var item = this.props.item;
+        item.title = this.state.title;
+        item.summary = this.state.summary;
+        item.date = this.state.date;
+
+        this.props.onUpdateItem(item);
+        this.handleClose();
     }
 
     handleClose() {
@@ -95,26 +122,36 @@ class EditLayout extends React.Component {
         return day + " " + hr + ":" + min + " " + ampm + " " + date + " " + month + " " + year;
     }
 
+    // Create Components
     createButtonAction() {
         return this.props.mode == "new" ? 
             <button onClick={this.handleAdd}>Done</button> :
-            <button onClick={this.handleRemove}>Remove</button>;
+            <div>
+                <button onClick={this.handleRemove}>Remove</button>
+                <button onClick={this.handleUpdate}>Done</button>
+            </div>;
     }
 
     createTitleText() {
-        if(this.props.item != undefined) {
-            return this.getValidatedText(this.props.item.title, "New Topic", true);
-        }
-    
-        return this.getValidatedText(this.state.title, "New Topic", this.state.titleChangedOnce);
+        var defaultTitle = "New Topic";
+        return this.getValidatedText(this.state.title, defaultTitle, this.state.titleChangedOnce);
     }
 
     createSummaryText() {
-        if(this.props.item != undefined) {
-            return this.getValidatedText(this.props.item.summary, "New Topic", true);
+        var defaultSummary = "Please add some content..";
+        return this.getValidatedText(this.state.summary, defaultSummary, this.state.titleChangedOnce);
+    }
+
+    getTaskId() {
+        if (this.props.item != undefined) {
+            return this.props.item.itemId;
         }
-    
-        return this.getValidatedText(this.state.summary, "New Topic", this.state.titleChangedOnce);
+
+        return "0";
+    }
+
+    getTitleBanner() {
+        return this.props.mode == "new" ? <h4>Create New Reminder</h4> : undefined;
     }
 
     //Rendering
@@ -122,11 +159,14 @@ class EditLayout extends React.Component {
         var buttonAction = this.createButtonAction();
         var titleValue = this.createTitleText();
         var summaryValue = this.createSummaryText();
+        var banner = this.getTitleBanner();
+        var taskId = this.getTaskId();
 
         return (
             <div className="edit-layout">
                 <button onClick={this.handleClose}>x</button>
-                <br />
+                {banner}
+                <h4>Task #{taskId}</h4>
                 <input className="title" type="text" name="Title" value={titleValue} onChange={this.handleTitleChange} onClick={this.handleTitleClick}/>
                 <br />
                 <input className="summary" type="text" name="Summary" value={summaryValue} onChange={this.handleSummaryChange} onClick={this.handleSummaryClick}/>
