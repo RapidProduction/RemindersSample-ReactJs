@@ -23,9 +23,10 @@ class App extends React.Component {
         //Loaders
         this.loader = new Loader();
         items = this.loader.loadItem();
+        /*
         this.loader.startAutosaving(() => {
             return items;
-        });
+        });*/
     }
 
     registerHandles() {
@@ -143,10 +144,24 @@ class App extends React.Component {
         return displayItems;
     }
 
+    getDisplayStatus() {
+        var completeTaskCount = this.filterItemByComplete(true).length;
+
+        if(this.state.filter == "active") {
+            return <p className="status">{items.length - completeTaskCount} Active Task(s)</p>
+        }
+        else if(this.state.filter == "complete") {
+            return <p className="status">{completeTaskCount} Completed Task(s)</p>
+        }
+        
+        return <p className="status">{items.length} Task(s) : {completeTaskCount} Completed</p>
+    }
+
     render() {
         var layoutClassName = this.state.mode == "edit" ? "home-layout layout hide" : "home-layout layout";
         var editLayoutEnable = this.state.mode == "edit" ? true : false;
         var displayItems = this.getDisplayItem();
+        var displayStatus = this.getDisplayStatus();
         var filterOptions = [
             {
                 name: "All",
@@ -181,6 +196,7 @@ class App extends React.Component {
                             <ActionBar actions={filterOptions} onAction={this.handleFilter}/>
                         </tr>
                     </div>
+                    {displayStatus}
                     <div>
                         <ItemList items={displayItems} onClick={this.handleItemListOnClick} onCheck={this.updateItem}/>
                     </div>

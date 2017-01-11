@@ -1,6 +1,10 @@
+@import '../fonts/normal';
+
 .topic-component {
+    font-family: Normal;
+
     .item {
-        font-size: 25px;
+        font-size: 20px;
         color: black;
     }
 

@@ -1,3 +1,7 @@
+@import '../fonts/superLight';
+@import '../fonts/normal';
+@import '../fonts/handWriting';
+
 .home-layout {
     &.layout {
         display: block;
@@ -17,14 +21,13 @@
     }
     
     .header {
-        height: 100px;
+        height: 120px;
     }
 
     .title {
         margin-left: 10px; 
         font-size: 60px;
-        font-family: "Trebuchet MS", Helvetica, sans-serif;
-        font-weight: 100;
+        font-family: HandWrite;
     }
 
     .addButton {
@@ -43,5 +46,13 @@
         cursor:pointer;
         background: white;
         color: black;
+    }
+
+    .status {
+        margin: 0px;
+        margin-left: 15px; 
+        font-size: 20px;
+        font-family: Normal;
+        height: 30px;
     }
 }
