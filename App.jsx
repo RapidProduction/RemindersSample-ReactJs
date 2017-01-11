@@ -58,7 +58,11 @@ class App extends React.Component {
 
     //Item Manipulating
     addItem(title, summary, date) {
-        var nextId = items[items.length-1].itemId + 1;
+        var nextId = 0;
+        if(items.length > 0) {
+            var nextId = items[items.length-1].itemId + 1;
+        }
+
         items.push({
             "itemId": nextId,
             "title": title,
