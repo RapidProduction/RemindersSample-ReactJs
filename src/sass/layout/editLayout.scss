@@ -18,7 +18,7 @@
 
     .container {
         width: 520px;
-        height: 500px;
+        height: 510px;
         border-radius: 5px;
         background: lightgrey;
         text-align: center;
@@ -26,43 +26,53 @@
     }
 
     .banner {
-        border-radius: 4px;
-        height: 35px;
+        height: 10px;
         width: 100%;
         font-size: 35px;
         margin-top: 10px;
     }
 
     .title {
-        border-width: 1px;
+        border-width: 0px;
         border-radius: 4px;
         height: 35px;
-        width: 96%;
+        width: 95%;
         font-size: 30px;
-        background: whitesmoke;
+        background: no-repeat;
+        text-decoration: underline;
     }
 
     .summary {
         border-width: 1px;
         border-radius: 4px;
-        height: 50%;
-        width: 96%;
-        font-size: 15px;
+        border-color: lightgray;
+        height: 60%;
+        padding: 8px;
+        width: 94%;
+        font-size: 16px;
+        margin-top: 5px;
+        background: whitesmoke;
+        resize: none;
     }
 
     .closeButton {
+        border-width: 0px;
+        border-radius: 20px;
         float: right;
-        margin: 3px;
-    }
-
-    .doneButton {
-        float: right;
+        margin: 5px;
+        height: 20px;
+        width: 20px;
+        background: white;
+        text-align: center;
     }
 
     .actionButton {
-        border-radius: 4px;
-        font-size: 12px;
+        border-width: 0px;
+        border-radius: 6px;
+        margin: 5px;
         background: white;
+        text-align: center;
+        font-size: 13px;
     }
 
     .date {

@@ -159,13 +159,13 @@ class EditLayout extends React.Component {
 
     getTitleBanner() {
         return this.props.mode == "new" ? 
-            <p className="edit-layout banner">Create New Reminder</p> : 
+            <p className="edit-layout banner">Creating One</p> : 
             <p className="edit-layout banner">On Editing</p>;
     }
 
     getDateText() {
         return this.state.item != undefined ? 
-            <p className="date">{this.state.item}</p> : 
+            <p className="date">{this.state.item.date}</p> : 
             <p className="date">{this.getHumanReadableDate}</p>;
     }
 
@@ -192,7 +192,7 @@ class EditLayout extends React.Component {
                     <p>Task #{taskId}</p>
                     <input className="title" type="text" name="Title" value={titleValue} onChange={this.handleTitleChange} onClick={this.handleTitleClick}/>
                     <br />
-                    <input className="summary" type="text" name="Summary" value={summaryValue} onChange={this.handleSummaryChange} onClick={this.handleSummaryClick}/>
+                    <textarea className="summary" type="text" cols="40" rows="5" name="Summary" value={summaryValue} onChange={this.handleSummaryChange} onClick={this.handleSummaryClick}/>
                     <br />
                     {dateText}
                     {buttonAction}

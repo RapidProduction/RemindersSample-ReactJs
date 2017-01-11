@@ -92,7 +92,6 @@ class App extends React.Component {
     }
 
     handleItemListOnClick(clickedItem) {
-        console.log("Call manage");
         this.manageEditOverlay(true, "edit", clickedItem);
     }
 
