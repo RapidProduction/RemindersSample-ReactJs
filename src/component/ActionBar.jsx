@@ -16,8 +16,16 @@ class ActionBar extends React.Component {
         }
     }
 
+    getTitleText() {
+        if(this.props.title != undefined) {
+            return <p className="actionbar-component title">{this.props.title}</p>;
+        }
+    }
+
     render() {
         var actionButtons = [];
+        var titleText = this.getTitleText();
+
         for(var i=0; i<this.props.actions.length; i++) {
             let mode = this.props.actions[i].mode;
             let actionName = this.props.actions[i].name;
@@ -30,7 +38,7 @@ class ActionBar extends React.Component {
         return (
             <div className="actionbar-component layout">
                 <div className="actionbar-component container">
-                    <p className="actionbar-component title">{this.props.title}</p>
+                    {titleText}
                     {actionButtons}
                 </div>
             </div>

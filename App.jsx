@@ -173,7 +173,7 @@ class App extends React.Component {
                             </td>
                         </tr>
                         <tr>
-                            <ActionBar title="Filter" actions={filterOptions} onAction={this.handleFilter}/>
+                            <ActionBar actions={filterOptions} onAction={this.handleFilter}/>
                         </tr>
                     </div>
                     <div>
