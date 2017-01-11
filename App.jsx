@@ -23,10 +23,9 @@ class App extends React.Component {
         //Loaders
         this.loader = new Loader();
         items = this.loader.loadItem();
-        /*
         this.loader.startAutosaving(() => {
             return items;
-        });*/
+        });
     }
 
     registerHandles() {
