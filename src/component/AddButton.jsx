@@ -14,7 +14,7 @@ class AddButton extends React.Component {
 
     render() {
         return (
-            <button onClick={this.handleClick}>
+            <button className="addButton" onClick={this.handleClick}>
                 +
             </button>
         );

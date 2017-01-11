@@ -45,6 +45,8 @@ class EditLayout extends React.Component {
         if(titleValue != "" && summaryValue != "") {
             this.props.onAddItem(titleValue, summaryValue, this.getHumanReadableDate());
         }
+
+        this.handleClose();
     }
 
     handleRemove() {
@@ -63,7 +65,12 @@ class EditLayout extends React.Component {
     }
 
     handleClose() {
-        this.props.onClose();
+        if (this.props.onClose != undefined) {
+            this.props.onClose();
+        }
+        else {
+            console.log("Cannot close dialog due to onClose event is undefined.");
+        }
     }
 
     handleTitleChange(event) {
@@ -125,10 +132,10 @@ class EditLayout extends React.Component {
     // Create Components
     createButtonAction() {
         return this.props.mode == "new" ? 
-            <button onClick={this.handleAdd}>Done</button> :
+            <button className="edit-layout actionButton" onClick={this.handleAdd}>Done</button> :
             <div>
-                <button onClick={this.handleRemove}>Remove</button>
-                <button onClick={this.handleUpdate}>Done</button>
+                <button className="edit-layout actionButton" onClick={this.handleRemove}>Remove</button>
+                <button className="edit-layout actionButton" onClick={this.handleUpdate}>Done</button>
             </div>;
     }
 
@@ -151,7 +158,15 @@ class EditLayout extends React.Component {
     }
 
     getTitleBanner() {
-        return this.props.mode == "new" ? <h4>Create New Reminder</h4> : undefined;
+        return this.props.mode == "new" ? 
+            <p className="edit-layout banner">Create New Reminder</p> : 
+            <p className="edit-layout banner">On Editing</p>;
+    }
+
+    getDateText() {
+        return this.state.item != undefined ? 
+            <p className="date">{this.state.item}</p> : 
+            <p className="date">{this.getHumanReadableDate}</p>;
     }
 
     //Rendering
@@ -159,19 +174,29 @@ class EditLayout extends React.Component {
         var buttonAction = this.createButtonAction();
         var titleValue = this.createTitleText();
         var summaryValue = this.createSummaryText();
+        var dateText = this.getDateText();
         var banner = this.getTitleBanner();
         var taskId = this.getTaskId();
+        var showModeClassName = this.props.showEnable == true ? "edit-layout layout show" : "edit-layout layout hide";
 
         return (
-            <div className="edit-layout">
-                <button onClick={this.handleClose}>x</button>
-                {banner}
-                <h4>Task #{taskId}</h4>
-                <input className="title" type="text" name="Title" value={titleValue} onChange={this.handleTitleChange} onClick={this.handleTitleClick}/>
-                <br />
-                <input className="summary" type="text" name="Summary" value={summaryValue} onChange={this.handleSummaryChange} onClick={this.handleSummaryClick}/>
-                <br />
-                {buttonAction}
+            <div className={showModeClassName}>
+                <div className="edit-layout container">
+                    <button className="edit-layout closeButton"
+                        name="CloseButton" 
+                        onClick={this.handleClose}>
+                        X
+                    </button>
+
+                    {banner}
+                    <p>Task #{taskId}</p>
+                    <input className="title" type="text" name="Title" value={titleValue} onChange={this.handleTitleChange} onClick={this.handleTitleClick}/>
+                    <br />
+                    <input className="summary" type="text" name="Summary" value={summaryValue} onChange={this.handleSummaryChange} onClick={this.handleSummaryClick}/>
+                    <br />
+                    {dateText}
+                    {buttonAction}
+                </div>
             </div>
         );
     }

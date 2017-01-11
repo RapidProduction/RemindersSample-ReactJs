@@ -1,24 +1,71 @@
 .edit-layout {
-    border-width: 10px;
-    width: 500px;
-    background: grey;
+    &.layout {
+        position: fixed;
+        left: 10px;
+        top: 10px;
+        width: 550px;
+        height: 550px;
+        z-index: 1;
+
+        &.show {
+            display: block;
+        }
+
+        &.hide {
+            display: none;
+        }
+    }
+
+    .container {
+        width: 520px;
+        height: 500px;
+        border-radius: 5px;
+        background: lightgrey;
+        text-align: center;
+        margin: auto;
+    }
+
+    .banner {
+        border-radius: 4px;
+        height: 35px;
+        width: 100%;
+        font-size: 35px;
+        margin-top: 10px;
+    }
 
     .title {
+        border-width: 1px;
+        border-radius: 4px;
         height: 35px;
-        width: 400px;
+        width: 96%;
         font-size: 30px;
+        background: whitesmoke;
     }
+
     .summary {
-        height: 200px;
-        width: 400px;
+        border-width: 1px;
+        border-radius: 4px;
+        height: 50%;
+        width: 96%;
         font-size: 15px;
     }
 
     .closeButton {
-        
+        float: right;
+        margin: 3px;
     }
 
     .doneButton {
-        
+        float: right;
+    }
+
+    .actionButton {
+        border-radius: 4px;
+        font-size: 12px;
+        background: white;
+    }
+
+    .date {
+        font-size: 15px;
     }
 }

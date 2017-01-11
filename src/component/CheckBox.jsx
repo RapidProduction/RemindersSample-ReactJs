@@ -7,10 +7,12 @@ class CheckBox extends React.Component {
         this.handleOnCheck = this.handleOnCheck.bind(this);
     }
 
-    handleOnCheck() {
+    handleOnCheck(event) {
         if (this.props.onCheck != undefined) {
             this.props.onCheck();
         }
+        
+        event.stopPropagation();
     }
 
     render() {

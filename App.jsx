@@ -23,9 +23,9 @@ class App extends React.Component {
         //Loaders
         this.loader = new Loader();
         items = this.loader.loadItem();
-        this.loader.startAutosaving(() => {
+        /*this.loader.startAutosaving(() => {
             return items;
-        });
+        });*/
     }
 
     registerHandles() {
@@ -43,7 +43,7 @@ class App extends React.Component {
     //Overlaying
     manageEditOverlay(showEnable, mode, item) {
         this.setState(prevState => ({
-            mode: showEnable == true ? "edit" : "show",
+            mode: showEnable == true ? "edit" : "home",
             editMode: mode,
             clickedItem: item
         }));
@@ -51,11 +51,9 @@ class App extends React.Component {
 
     closeEditOverlay() {
         this.setState(prevState => ({
-            mode: "show",
+            mode: "home",
             editMode: ""
         }));
-
-        this.setState(this.state);
     }
 
     //Item Manipulating
@@ -94,7 +92,8 @@ class App extends React.Component {
     }
 
     handleItemListOnClick(clickedItem) {
-        this.manageEditOverlay("edit", "edit", clickedItem);
+        console.log("Call manage");
+        this.manageEditOverlay(true, "edit", clickedItem);
     }
 
     //Private Logics
@@ -141,7 +140,7 @@ class App extends React.Component {
     }
 
     render() {
-        var editLayoutEnable = this.mode == "edit" ? true : false;
+        var editLayoutEnable = this.state.mode == "edit" ? true : false;
         var displayItems = this.getDisplayItem();
         var filterOptions = [
             {
@@ -163,7 +162,7 @@ class App extends React.Component {
 
         return (
             <div>
-                <div className="home-layout">
+                <div className="home-layout layout">
                     <div>
                         <tr>
                             <td>

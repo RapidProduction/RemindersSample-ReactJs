@@ -2,6 +2,8 @@ import React from 'react';
 import CheckBox from './CheckBox.jsx';
 import Topic from './Topic.jsx';
 
+require('../sass/component/item.scss');
+
 class Item extends React.Component {
     constructor(props) {
         super(props);
@@ -28,7 +30,7 @@ class Item extends React.Component {
 
     render() {
         return (
-            <div onClick={this.handleOnClick}>
+            <div className="item-component" onClick={this.handleOnClick}>
                 <table>
                     <tr>
                         <td>
