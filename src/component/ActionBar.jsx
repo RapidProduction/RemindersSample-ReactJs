@@ -1,5 +1,7 @@
 import React from 'react';
 
+require('../sass/component/actionBar.scss');
+
 class ActionBar extends React.Component {
     constructor(props) {
         super(props);
@@ -26,9 +28,11 @@ class ActionBar extends React.Component {
         }
 
         return (
-            <div>
-                {this.props.title}
-                {actionButtons}
+            <div className="actionbar-component layout">
+                <div className="actionbar-component container">
+                    <p className="actionbar-component title">{this.props.title}</p>
+                    {actionButtons}
+                </div>
             </div>
         );
     }

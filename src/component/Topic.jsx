@@ -9,11 +9,11 @@ class Topic extends React.Component {
 
     render() {
         return (
-            <div className="topic">
-                <div className="item">
+            <div className="topic-component">
+                <div className="topic-component item">
                     {this.props.title}
                 </div>
-                <div className="date">
+                <div className="topic-component date">
                     {this.props.date}
                 </div>
             </div>

@@ -163,7 +163,7 @@ class App extends React.Component {
         return (
             <div>
                 <div className={layoutClassName}>
-                    <div>
+                    <div className="hone-layout header">
                         <tr>
                             <td>
                                 <Title />

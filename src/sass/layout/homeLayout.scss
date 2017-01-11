@@ -18,11 +18,25 @@
     
 
     .title {
+        margin-left: 10px; 
         font-size: 50px;
     }
 
     .addButton {
-        float: right;
-        margin: 10px;
+        position: absolute;
+        right: 15px;
+        top: 15px;
+
+        border-width: 0px;
+        border-radius: 30px;
+        width: 30px;
+        height: 30px;
+
+        text-align: center;
+        font-size: 22px;
+        font-weight: 100;
+        cursor:pointer;
+        background: white;
+        color: black;
     }
 }
