@@ -1,5 +1,7 @@
 import React from 'react';
 
+require('../sass/component/checkBox.scss');
+
 class CheckBox extends React.Component {
     constructor(props) {
         super(props);
@@ -17,7 +19,7 @@ class CheckBox extends React.Component {
 
     render() {
         return (
-            <input type="checkbox" onClick={this.handleOnCheck} checked={this.props.isChecked}/>
+            <input className="checkbox-component" type="checkbox" onClick={this.handleOnCheck} checked={this.props.isChecked}/>
         );
     }
 }

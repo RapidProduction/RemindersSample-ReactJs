@@ -4,5 +4,16 @@
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+ */
     user-select: none;
-    cursor:pointer
+    cursor:pointer;
+
+    .container {
+        margin: 0px;
+    }
+
+    .topic {
+        border-width: 2px;
+        border-color: black;
+        margin-left :5px;
+        margin-bottom: 0px;
+    }
 }

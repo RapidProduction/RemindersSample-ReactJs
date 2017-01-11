@@ -36,7 +36,7 @@
         -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* IE10+ */
         user-select: none;
-        cursor:default;
+        cursor: default;
     }
 
     .title {
@@ -47,7 +47,7 @@
         font-size: 30px;
         background: no-repeat;
         text-decoration: underline;
-        cursor:pointer;
+        cursor: pointer;
     }
 
     .summary {
@@ -61,7 +61,7 @@
         margin-top: 5px;
         background: whitesmoke;
         resize: none;
-        cursor:pointer;
+        cursor: pointer;
     }
 
     .closeButton {
@@ -74,7 +74,7 @@
         font-weight: 100;
         background: white;
         text-align: center;
-        cursor:pointer;
+        cursor: pointer;
     }
 
     .actionButton {

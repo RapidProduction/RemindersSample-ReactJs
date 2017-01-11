@@ -1,6 +1,8 @@
 import React from 'react';
 import Item from './Item.jsx';
 
+require('../sass/component/itemlist.scss');
+
 class ItemList extends React.Component {
     constructor(props) {
         super(props);
@@ -33,7 +35,7 @@ class ItemList extends React.Component {
         }
         
         return (
-            <ul>
+            <ul className="itemlist-component">
                 {listItems}
             </ul>
         );

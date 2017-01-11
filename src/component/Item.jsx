@@ -31,13 +31,15 @@ class Item extends React.Component {
     render() {
         return (
             <div className="item-component" onClick={this.handleOnClick}>
-                <table>
+                <table className="item-component container">
                     <tr>
                         <td>
                             <CheckBox isChecked={this.props.item.isDone} onCheck={this.handleOnCheck}/>
                         </td>    
                         <td>
-                            <Topic title={this.props.item.title} date={this.props.item.date} />
+                            <div className="item-component topic">
+                                <Topic title={this.props.item.title} date={this.props.item.date} />
+                            </div>
                         </td>
                     </tr>
                 </table>
