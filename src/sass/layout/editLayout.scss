@@ -54,7 +54,7 @@
         border-width: 1px;
         border-radius: 4px;
         border-color: lightgray;
-        height: 58%;
+        height: 62%;
         padding: 8px;
         width: 94%;
         font-size: 16px;
@@ -100,6 +100,11 @@
     }
 
     .taskNumber {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        font-weight: 100px;
+        margin: 0px;
+
         -webkit-user-select: none; /* Chrome/Safari */        
         -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* IE10+ */
