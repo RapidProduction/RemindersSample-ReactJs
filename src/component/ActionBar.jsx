@@ -18,9 +18,10 @@ class ActionBar extends React.Component {
         var actionButtons = [];
         for(var i=0; i<this.props.actions.length; i++) {
             let mode = this.props.actions[i].mode;
+            let actionName = this.props.actions[i].name;
             actionButtons.push(
                 <button onClick={() => this.handleClick(mode)}>
-                    {this.props.actions[i].name}
+                    {actionName}
                 </button>);
         }
 

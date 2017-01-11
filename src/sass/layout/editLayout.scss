@@ -18,7 +18,7 @@
 
     .container {
         width: 520px;
-        height: 510px;
+        height: 540px;
         border-radius: 5px;
         background: lightgrey;
         text-align: center;
@@ -26,10 +26,17 @@
     }
 
     .banner {
+        padding-top: 10px;
         height: 10px;
         width: 100%;
         font-size: 35px;
         margin-top: 10px;
+
+        -webkit-user-select: none; /* Chrome/Safari */        
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+ */
+        user-select: none;
+        cursor:default;
     }
 
     .title {
@@ -40,19 +47,21 @@
         font-size: 30px;
         background: no-repeat;
         text-decoration: underline;
+        cursor:pointer;
     }
 
     .summary {
         border-width: 1px;
         border-radius: 4px;
         border-color: lightgray;
-        height: 60%;
+        height: 58%;
         padding: 8px;
         width: 94%;
         font-size: 16px;
         margin-top: 5px;
         background: whitesmoke;
         resize: none;
+        cursor:pointer;
     }
 
     .closeButton {
@@ -64,6 +73,7 @@
         width: 20px;
         background: white;
         text-align: center;
+        cursor:pointer;
     }
 
     .actionButton {
@@ -73,9 +83,26 @@
         background: white;
         text-align: center;
         font-size: 13px;
+        cursor:pointer;
     }
 
     .date {
-        font-size: 15px;
+        font-size: 16px;
+        color: purple;
+        margin: 2px;
+
+        -webkit-user-select: none; /* Chrome/Safari */        
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+ */
+        user-select: none;
+        cursor:default;
+    }
+
+    .taskNumber {
+        -webkit-user-select: none; /* Chrome/Safari */        
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+ */
+        user-select: none;
+        cursor:default;
     }
 }

@@ -139,6 +139,7 @@ class App extends React.Component {
     }
 
     render() {
+        var layoutClassName = this.state.mode == "edit" ? "home-layout layout hide" : "home-layout layout";
         var editLayoutEnable = this.state.mode == "edit" ? true : false;
         var displayItems = this.getDisplayItem();
         var filterOptions = [
@@ -161,7 +162,7 @@ class App extends React.Component {
 
         return (
             <div>
-                <div className="home-layout layout">
+                <div className={layoutClassName}>
                     <div>
                         <tr>
                             <td>

@@ -9,11 +9,11 @@
         left: 10px;
         top: 10px;
         z-index: 0;
-    }
-
-    
-    .layout {
         
+        &.hide {
+            opacity: 0.2;
+            pointer-events: none;
+        }
     }
     
 
